@@ -1,0 +1,527 @@
+/* ==================== التصميم العام ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', 'Tajawal', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #1a3a0a, #3d6b2a, #1a3a0a);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 0;
+}
+
+/* ==================== الشاشة الرئيسية ==================== */
+#mainMenu {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 30px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    max-width: 500px;
+    width: 100%;
+    border: 3px solid #f5a623;
+}
+
+#mainMenu h1 {
+    color: #2d5016;
+    font-size: 3em;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+#mainMenu h2 {
+    font-size: 3em;
+    margin-bottom: 25px;
+    letter-spacing: 10px;
+}
+
+#mainMenu button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    background: #4a7c2e;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#mainMenu button:hover {
+    transform: scale(1.03);
+    background: #5a9c3a;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+#mainMenu button:active {
+    transform: scale(0.97);
+}
+
+/* ==================== شاشة اللعب ==================== */
+#gameScreen {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 30px;
+    padding: 20px;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    border: 3px solid #f5a623;
+}
+
+#gameHeader {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 18px;
+    background: linear-gradient(135deg, #2d5016, #4a7c2e);
+    color: white;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-weight: bold;
+}
+
+#gameHeader span {
+    background: rgba(255,255,255,0.15);
+    padding: 4px 12px;
+    border-radius: 10px;
+}
+
+#farmArea {
+    background: linear-gradient(135deg, #7cb342, #8bc34a, #7cb342);
+    border-radius: 20px;
+    padding: 20px;
+    min-height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #4a7c2e;
+    position: relative;
+}
+
+/* ==================== الحيوانات والمحاصيل ==================== */
+.animal, .crop {
+    background: white;
+    padding: 15px 20px;
+    border-radius: 15px;
+    font-size: 2.5em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 2px solid #ddd;
+    user-select: none;
+    min-width: 70px;
+    text-align: center;
+}
+
+.animal:hover, .crop:hover {
+    transform: scale(1.1) rotate(-2deg);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    border-color: #f5a623;
+}
+
+.animal:active, .crop:active {
+    transform: scale(0.9);
+}
+
+/* ==================== المهام ==================== */
+#tasksContainer {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f0f7ea;
+    border-radius: 15px;
+    border: 2px solid #4a7c2e;
+}
+
+#tasksContainer h3 {
+    color: #2d5016;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+
+#tasksList {
+    list-style: none;
+    padding: 0;
+}
+
+#tasksList li {
+    padding: 10px 15px;
+    margin: 5px 0;
+    background: white;
+    border-radius: 10px;
+    border-right: 5px solid #4a7c2e;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#tasksList li.completed {
+    background: #d4edda;
+    border-right-color: #28a745;
+    text-decoration: line-through;
+    opacity: 0.8;
+}
+
+#tasksList li .task-progress {
+    background: #4a7c2e;
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* ==================== أزرار التحكم ==================== */
+#gameControls {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#gameControls button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 15px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 120px;
+}
+
+#endLevelBtn {
+    background: #dc3545;
+    color: white;
+}
+
+#endLevelBtn:hover {
+    background: #c82333;
+    transform: scale(1.02);
+}
+
+#resetLevelBtn {
+    background: #ffc107;
+    color: #333;
+}
+
+#resetLevelBtn:hover {
+    background: #e0a800;
+    transform: scale(1.02);
+}
+
+/* ==================== شاشة النتائج ==================== */
+#resultScreen {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px 30px;
+    border-radius: 30px;
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    border: 3px solid #f5a623;
+}
+
+#resultScreen h1 {
+    color: #f5a623;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+#resultStarsContainer {
+    font-size: 3em;
+    margin: 20px 0;
+}
+
+#resultRewards {
+    font-size: 1.3em;
+    margin: 20px 0;
+    padding: 15px;
+    background: #f0f7ea;
+    border-radius: 15px;
+}
+
+#resultRewards p {
+    margin: 8px 0;
+}
+
+#resultButtons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#resultButtons button {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#resultButtons button:first-child {
+    background: #4a7c2e;
+    color: white;
+}
+
+#resultButtons button:first-child:hover {
+    background: #5a9c3a;
+    transform: scale(1.02);
+}
+
+#resultButtons button:last-child {
+    background: #6c757d;
+    color: white;
+}
+
+#resultButtons button:last-child:hover {
+    background: #5a6268;
+    transform: scale(1.02);
+}
+
+/* ==================== شاشة المتجر ==================== */
+#shopScreen {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 30px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    border: 3px solid #f5a623;
+}
+
+#shopScreen h1 {
+    text-align: center;
+    color: #2d5016;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+.shop-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin: 10px 0;
+    background: #f8f9fa;
+    border-radius: 15px;
+    border: 2px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.shop-item:hover {
+    border-color: #4a7c2e;
+    background: #f0f7ea;
+}
+
+.shop-item button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 10px;
+    background: #4a7c2e;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.shop-item button:hover {
+    background: #5a9c3a;
+    transform: scale(1.05);
+}
+
+#shopBackBtn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    background: #6c757d;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#shopBackBtn:hover {
+    background: #5a6268;
+    transform: scale(1.02);
+}
+
+/* ==================== شاشة الإعدادات ==================== */
+#settingsScreen {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 30px;
+    max-width: 500px;
+    width: 100%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    border: 3px solid #f5a623;
+}
+
+#settingsScreen h1 {
+    text-align: center;
+    color: #2d5016;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+#settingsContent {
+    padding: 10px 0;
+}
+
+#settingsContent label {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 12px;
+    margin: 8px 0;
+    background: #f8f9fa;
+    border-radius: 10px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#settingsContent label:hover {
+    background: #f0f7ea;
+}
+
+#settingsContent input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+#resetProgressBtn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1em;
+    font-weight: bold;
+    background: #dc3545;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#resetProgressBtn:hover {
+    background: #c82333;
+    transform: scale(1.02);
+}
+
+#settingsBackBtn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    background: #6c757d;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#settingsBackBtn:hover {
+    background: #5a6268;
+    transform: scale(1.02);
+}
+
+/* ==================== استجابة للجوال ==================== */
+@media (max-width: 600px) {
+    #mainMenu {
+        padding: 25px 15px;
+    }
+    
+    #mainMenu h1 {
+        font-size: 2.2em;
+    }
+    
+    #mainMenu h2 {
+        font-size: 2.2em;
+    }
+    
+    #gameHeader {
+        font-size: 0.85em;
+        padding: 8px 12px;
+    }
+    
+    .animal, .crop {
+        font-size: 1.8em;
+        padding: 10px 15px;
+        min-width: 55px;
+    }
+    
+    #farmArea {
+        padding: 12px;
+        gap: 10px;
+        min-height: 200px;
+    }
+    
+    #gameControls button {
+        padding: 10px 15px;
+        font-size: 0.9em;
+        min-width: 80px;
+    }
+    
+    #resultScreen {
+        padding: 25px 15px;
+    }
+    
+    #resultScreen h1 {
+        font-size: 2em;
+    }
+    
+    #resultStarsContainer {
+        font-size: 2.2em;
+    }
+    
+    .shop-item {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .animal, .crop {
+        font-size: 1.4em;
+        padding: 8px 10px;
+        min-width: 45px;
+    }
+    
+    #gameHeader {
+        font-size: 0.75em;
+    }
+}
