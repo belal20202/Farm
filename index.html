@@ -2,30 +2,54 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>🌾 مزرعتي - لعبة المزرعة العربية</title>
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- ==================== الشاشة الرئيسية ==================== -->
-    <div id="mainMenu">
-        <h1>🌾 مزرعتي</h1>
-        <h2>🐓 🐄 🐑</h2>
-        <button onclick="startGame()">▶️ ابدأ اللعب</button>
-        <button onclick="showShop()">🛒 المتجر</button>
-        <button onclick="showLevels()">📋 المراحل</button>
-        <button onclick="showSettings()">⚙️ الإعدادات</button>
+    <!-- ========================================================== -->
+    <!--                  الشاشة الرئيسية                             -->
+    <!-- ========================================================== -->
+    <div id="mainMenu" class="screen">
+        <div class="menu-content">
+            <h1>🌾 مزرعتي</h1>
+            <p class="subtitle">🐓 🐄 🐑 🐴 🐪 🦆 🐇</p>
+            <div class="menu-stats">
+                <span>⭐ <span id="menuStars">0</span></span>
+                <span>🪙 <span id="menuGold">0</span></span>
+                <span>🔘 <span id="menuSilver">0</span></span>
+            </div>
+            <button class="btn-primary" onclick="startGame()">▶️ ابدأ اللعب</button>
+            <button class="btn-secondary" onclick="showLevels()">📋 المراحل</button>
+            <button class="btn-secondary" onclick="showShop()">🛒 المتجر</button>
+            <button class="btn-secondary" onclick="showSettings()">⚙️ الإعدادات</button>
+            <button class="btn-secondary" onclick="showAchievements()">🏆 الإنجازات</button>
+        </div>
     </div>
 
-    <!-- ==================== شاشة اللعب ==================== -->
-    <div id="gameScreen" style="display:none;">
+    <!-- ========================================================== -->
+    <!--                  شاشة اللعب                                 -->
+    <!-- ========================================================== -->
+    <div id="gameScreen" class="screen" style="display:none;">
         <!-- رأس اللعبة -->
         <div id="gameHeader">
-            <span>⭐ المرحلة: <span id="levelNumber">1</span></span>
-            <span>🪙 <span id="goldCoins">0</span></span>
-            <span>🔘 <span id="silverCoins">0</span></span>
-            <span>⏱️ <span id="timer">120</span> ثانية</span>
+            <div class="header-left">
+                <span>⭐ المرحلة: <strong id="levelNumber">1</strong></span>
+                <span>📖 <span id="levelName">بداية الحلم</span></span>
+            </div>
+            <div class="header-right">
+                <span>🪙 <span id="goldCoins">0</span></span>
+                <span>🔘 <span id="silverCoins">0</span></span>
+                <span>⏱️ <span id="timer">120</span>ث</span>
+            </div>
+        </div>
+
+        <!-- شريط التقدم -->
+        <div id="progressBar">
+            <div id="progressFill"></div>
+            <span id="progressText">0%</span>
         </div>
 
         <!-- منطقة المزرعة -->
@@ -35,73 +59,116 @@
                 <div class="animal" data-type="cow">🐄</div>
                 <div class="animal" data-type="sheep">🐑</div>
                 <div class="animal" data-type="horse">🐴</div>
+                <div class="animal" data-type="camel">🐪</div>
+                <div class="animal" data-type="duck">🦆</div>
+                <div class="animal" data-type="rabbit">🐇</div>
             </div>
             <div id="cropsContainer">
                 <div class="crop" data-type="wheat">🌾 قمح</div>
                 <div class="crop" data-type="carrot">🥕 جزر</div>
                 <div class="crop" data-type="tomato">🍅 طماطم</div>
+                <div class="crop" data-type="potato">🥔 بطاطس</div>
+                <div class="crop" data-type="strawberry">🍓 فراولة</div>
             </div>
         </div>
 
         <!-- المهام -->
         <div id="tasksContainer">
-            <h3>📋 المهام:</h3>
-            <ul id="tasksList"></ul>
+            <h3>📋 المهام</h3>
+            <div id="tasksList"></div>
         </div>
 
         <!-- أزرار التحكم -->
         <div id="gameControls">
-            <button onclick="endLevel()" id="endLevelBtn">⏹️ إنهاء المرحلة</button>
-            <button onclick="resetLevel()" id="resetLevelBtn">🔄 إعادة المحاولة</button>
+            <button class="btn-danger" onclick="endLevel()">⏹️ إنهاء</button>
+            <button class="btn-warning" onclick="resetLevel()">🔄 إعادة</button>
+            <button class="btn-info" onclick="backToMenu()">🏠 خروج</button>
         </div>
     </div>
 
-    <!-- ==================== شاشة النتائج ==================== -->
-    <div id="resultScreen" style="display:none;">
-        <h1>🎉 انتهت المرحلة!</h1>
-        <div id="resultStarsContainer">
-            <span id="resultStars">⭐⭐⭐</span>
-        </div>
-        <div id="resultRewards">
-            <p>🪙 <span id="resultGold">0</span> ذهبية</p>
-            <p>🔘 <span id="resultSilver">0</span> فضية</p>
-        </div>
-        <div id="resultButtons">
-            <button onclick="nextLevel()">▶️ المرحلة التالية</button>
-            <button onclick="backToMenu()">🏠 القائمة الرئيسية</button>
+    <!-- ========================================================== -->
+    <!--                  شاشة النتائج                               -->
+    <!-- ========================================================== -->
+    <div id="resultScreen" class="screen" style="display:none;">
+        <div class="result-content">
+            <h1 id="resultTitle">🎉 انتهت المرحلة!</h1>
+            <div id="resultStarsContainer">
+                <span id="resultStars">⭐⭐⭐</span>
+            </div>
+            <div id="resultDetails">
+                <p>📖 المرحلة: <span id="resultLevelName">بداية الحلم</span></p>
+                <p>⭐ النجوم: <span id="resultStarsCount">3</span></p>
+            </div>
+            <div id="resultRewards">
+                <p>🪙 <span id="resultGold">+5</span> ذهبية</p>
+                <p>🔘 <span id="resultSilver">+10</span> فضية</p>
+            </div>
+            <div id="resultButtons">
+                <button class="btn-primary" onclick="nextLevel()" id="nextLevelBtn">▶️ المرحلة التالية</button>
+                <button class="btn-secondary" onclick="retryLevel()">🔄 إعادة المحاولة</button>
+                <button class="btn-secondary" onclick="backToMenu()">🏠 القائمة</button>
+            </div>
         </div>
     </div>
 
-    <!-- ==================== شاشة المتجر ==================== -->
-    <div id="shopScreen" style="display:none;">
+    <!-- ========================================================== -->
+    <!--                  شاشة المراحل                               -->
+    <!-- ========================================================== -->
+    <div id="levelsScreen" class="screen" style="display:none;">
+        <h1>📋 المراحل</h1>
+        <div id="levelsGrid"></div>
+        <button class="btn-secondary" onclick="backToMenu()">🏠 العودة</button>
+    </div>
+
+    <!-- ========================================================== -->
+    <!--                  شاشة المتجر                               -->
+    <!-- ========================================================== -->
+    <div id="shopScreen" class="screen" style="display:none;">
         <h1>🛒 المتجر</h1>
         <div id="shopItems">
             <div class="shop-item">
                 <span>🐔 دجاجة جديدة</span>
                 <span>50 🪙</span>
-                <button onclick="buyItem('chicken', 50)">شراء</button>
+                <button onclick="buyItem('دجاجة', 50, 'gold')">شراء</button>
             </div>
             <div class="shop-item">
                 <span>🐄 بقرة جديدة</span>
                 <span>150 🪙</span>
-                <button onclick="buyItem('cow', 150)">شراء</button>
+                <button onclick="buyItem('بقرة', 150, 'gold')">شراء</button>
+            </div>
+            <div class="shop-item">
+                <span>🐑 خروف جديد</span>
+                <span>100 🪙</span>
+                <button onclick="buyItem('خروف', 100, 'gold')">شراء</button>
             </div>
             <div class="shop-item">
                 <span>🌾 بذور قمح (×10)</span>
                 <span>20 🔘</span>
-                <button onclick="buyItem('wheat_seeds', 20)">شراء</button>
+                <button onclick="buyItem('بذور قمح', 20, 'silver')">شراء</button>
+            </div>
+            <div class="shop-item">
+                <span>🥕 بذور جزر (×10)</span>
+                <span>25 🔘</span>
+                <button onclick="buyItem('بذور جزر', 25, 'silver')">شراء</button>
             </div>
             <div class="shop-item">
                 <span>⚡ طاقة سريعة</span>
-                <span>10 🔘</span>
-                <button onclick="buyItem('energy', 10)">شراء</button>
+                <span>15 🔘</span>
+                <button onclick="buyItem('طاقة', 15, 'silver')">شراء</button>
+            </div>
+            <div class="shop-item">
+                <span>⭐ مضاعف النجوم</span>
+                <span>200 🪙</span>
+                <button onclick="buyItem('مضاعف نجوم', 200, 'gold')">شراء</button>
             </div>
         </div>
-        <button onclick="backToMenu()" id="shopBackBtn">🏠 العودة</button>
+        <button class="btn-secondary" onclick="backToMenu()">🏠 العودة</button>
     </div>
 
-    <!-- ==================== شاشة الإعدادات ==================== -->
-    <div id="settingsScreen" style="display:none;">
+    <!-- ========================================================== -->
+    <!--                  شاشة الإعدادات                             -->
+    <!-- ========================================================== -->
+    <div id="settingsScreen" class="screen" style="display:none;">
         <h1>⚙️ الإعدادات</h1>
         <div id="settingsContent">
             <label>
@@ -113,9 +180,23 @@
             <label>
                 <input type="checkbox" id="vibrationToggle" checked> 📳 الاهتزاز
             </label>
-            <button onclick="resetProgress()" id="resetProgressBtn">🗑️ حذف التقدم</button>
+            <label>
+                <input type="checkbox" id="notificationsToggle" checked> 🔔 الإشعارات
+            </label>
+            <button class="btn-danger" onclick="resetProgress()">🗑️ حذف التقدم</button>
+            <button class="btn-info" onclick="exportProgress()">📤 تصدير التقدم</button>
+            <button class="btn-info" onclick="importProgress()">📥 استيراد التقدم</button>
         </div>
-        <button onclick="backToMenu()" id="settingsBackBtn">🏠 العودة</button>
+        <button class="btn-secondary" onclick="backToMenu()">🏠 العودة</button>
+    </div>
+
+    <!-- ========================================================== -->
+    <!--                  شاشة الإنجازات                             -->
+    <!-- ========================================================== -->
+    <div id="achievementsScreen" class="screen" style="display:none;">
+        <h1>🏆 الإنجازات</h1>
+        <div id="achievementsList"></div>
+        <button class="btn-secondary" onclick="backToMenu()">🏠 العودة</button>
     </div>
 
     <script src="script.js"></script>
